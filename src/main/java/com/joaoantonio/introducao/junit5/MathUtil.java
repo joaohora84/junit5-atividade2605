@@ -1,5 +1,7 @@
 package com.joaoantonio.introducao.junit5;
 
+import java.util.Objects;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -34,13 +36,24 @@ public class MathUtil {
             return Math.abs(a);
         }
          
-        //Propriedade5
-        if(a % b != 0) {
-            return 1;
+        
+        
+        return mdc(a-b,b);
+        
+    }
+    
+    public static int mdc(int ...valores){
+        
+        Objects.requireNonNull(valores, "O parametro não pode ser nulo para calcular o MDC");
+        
+        if (valores.length == 0) {
+            throw new IllegalArgumentException("É preciso indicar ao menos um valor pra calcular o MDC");
         }
-        
-        return -1;
-        
+        int a = valores[0];
+        for (int b : valores) {
+            a = mdc(a, b);
+        }
+        return a;
     }
     
 }
